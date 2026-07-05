@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  django:
+    image: gokulkumarg/welcomeapp
+
+    container_name: django_app
+
+    restart: always
+
+    ports:
+      - "8007:8000"
+
+    volumes:
+      - .:/app
+
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000
+      "
+  django2:
+    image: gokulkumarg/financial_transaction
+
+    container_name: django_app1
+
+    restart: always
+
+    ports:
+      - "8010:8010"
+
+    volumes:
+      - .:/app
+
+
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8010
+      "
+
+  
+
+volumes:
+  mysql_data:
