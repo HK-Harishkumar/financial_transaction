@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="d-flex justify-content-between">
+
+
+<h3>
+GL Master Summary
+</h3>
+
+
+<a
+href="{% url 'masters:create_gl' %}"
+class="btn btn-primary">
+
+
+Create GL
+
+
+</a>
+
+
+</div>
+
+<form method="GET">
+
+<div class="row">
+
+
+<div class="col-md-4">
+
+
+<input
+type="text"
+name="gl_code"
+class="form-control"
+placeholder="Search GL Code"
+value="{{request.GET.gl_code}}">
+
+
+</div>
+
+
+
+<div class="col-md-2">
+
+
+<button
+class="btn btn-primary">
+
+Search
+
+</button>
+
+
+</div>
+
+
+
+<div class="col-md-2">
+
+
+<a
+href="{% url 'masters:gl_list' %}"
+class="btn btn-secondary">
+
+Clear
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</form>
+
+
+<br>
+
+
+<table class="table table-bordered">
+
+
+<thead>
+
+
+<tr>
+
+<th>ID</th>
+
+<th>GL Code</th>
+
+<th>GL Description</th>
+
+<th>GL Type</th>
+
+<th>Status</th>
+
+</tr>
+
+
+</thead>
+
+
+<tbody>
+
+
+
+{% for gl in gls %}
+
+
+<tr>
+
+
+<td>
+{{gl.id}}
+</td>
+
+
+<td>
+{{gl.gl_no}}
+</td>
+
+
+<td>
+{{gl.gl_desc}}
+</td>
+
+
+<td>
+{{gl.gl_type}}
+</td>
+
+
+<td>
+{% if gl.status == 1 %}
+                    ACTIVE
+                    {% else %}
+                    INACTIVE
+                    {% endif %}
+</td>
+
+
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</tbody>
+
+
+</table>
+
+
+{% endblock %}

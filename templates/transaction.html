@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h3>
+Upload Financial Transactions
+</h3>
+
+
+<hr>
+{% if errors %}
+
+<div class="alert alert-danger">
+
+{{errors}}
+
+</div>
+
+{% endif %}
+
+<form action="{% url 'transactions:upload_transaction' %}" method="POST"
+      enctype="multipart/form-data">
+
+
+{% csrf_token %}
+
+
+
+<div class="mb-3">
+
+
+<label>
+Select Excel File
+</label>
+
+
+<input
+
+type="file"
+
+name="excel_file"
+
+class="form-control"
+
+required>
+
+
+</div>
+
+
+
+<button
+class="btn btn-primary">
+
+Upload
+
+</button>
+<button onclick="window.location.reload();"
+        type="reset"
+        class="btn btn-secondary">
+
+        Clear
+
+    </button>
+
+</form>
+
+
+
+<br>
+
+
+
+{% if success_count %}
+
+<div class="alert alert-success">
+
+Successful Records :
+{{success_count}}
+
+</div>
+
+{% endif %}
+
+
+
+
+{% if error_count %}
+
+<div class="alert alert-danger">
+
+Failed Records :
+{{error_count}}
+
+</div>
+
+{% endif %}
+
+
+
+{% endblock %}

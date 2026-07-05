@@ -1,0 +1,284 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h3>
+Trial Balance Summary
+</h3>
+
+<form method="GET">
+
+
+<div class="row">
+
+
+<div class="col-md-2">
+
+<label>
+Financial Year
+</label>
+
+
+<select name="year"
+class="form-control">
+
+
+<option value="">
+All Year
+</option>
+
+
+<option value="2026">
+2026
+</option>
+
+
+<option value="2025">
+2025
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+<div class="col-md-2">
+
+
+<label>
+Month
+</label>
+
+
+<select name="month"
+class="form-control">
+
+
+<option value="">
+All Month
+</option>
+
+
+<option value="1">
+January
+</option>
+
+
+<option value="2">
+February
+</option>
+
+
+<option value="3">
+March
+</option>
+
+
+<option value="4">
+April
+</option>
+
+
+<option value="5">
+May
+</option>
+
+
+<option value="6">
+June
+</option>
+
+
+<option value="7">
+July
+</option>
+
+
+<option value="8">
+August
+</option>
+
+
+<option value="9">
+September
+</option>
+
+
+<option value="10">
+October
+</option>
+
+
+<option value="11">
+November
+</option>
+
+
+<option value="12">
+December
+</option>
+
+
+</select>
+
+
+</div>
+
+
+<div class="col-md-2">
+
+<label>
+GL Number
+</label>
+
+
+<input
+type="text"
+name="gl_no"
+class="form-control"
+placeholder="Enter GL Code"
+value="{{request.GET.gl_no}}">
+
+
+</div>
+
+
+
+<div class="col-md-2 mt-4">
+
+
+<button class="btn btn-primary">
+
+Search
+
+</button>
+
+
+</div>
+
+
+
+<div class="col-md-2 mt-4">
+
+
+<a href="{% url 'transactions:transaction_summary' %}"
+class="btn btn-secondary">
+
+Clear
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</form>
+
+
+<br>
+<table class="table table-bordered">
+
+
+<thead>
+
+<tr>
+
+<th>Year</th>
+
+<th>Month</th>
+
+<th>Branch</th>
+
+<th>GL</th>
+
+<th>Opening</th>
+
+<th>Debit</th>
+
+<th>Credit</th>
+
+<th>Closing</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+{% for row in data %}
+
+
+<tr>
+
+
+<td>{{row.financial_year}}</td>
+
+
+<td>{{row.financial_month}}</td>
+
+
+<td>{{row.branch_id}}</td>
+
+
+<td>{{row.gl}}</td>
+
+
+<td>{{row.opening_balance}}</td>
+
+
+<td>{{row.debit}}</td>
+
+
+<td>{{row.credit}}</td>
+
+
+<td>{{row.closing_balance}}</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</tbody>
+
+
+<tfoot>
+
+<tr>
+
+<th colspan="5">
+TOTAL
+</th>
+
+
+<th>
+{{total_debit}}
+</th>
+
+
+<th>
+{{total_credit}}
+</th>
+
+
+</tr>
+
+</tfoot>
+
+
+</table>
+
+
+{% endblock %}

@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h3>
+Transaction Summary
+</h3>
+<form method="GET">
+
+<div class="row">
+
+
+<div class="col-md-3">
+
+<label>Voucher No</label>
+
+<input
+type="text"
+name="voucher_no"
+class="form-control"
+value="{{ request.GET.voucher_no }}" placeholder="Enter Voucher No">
+
+</div>
+
+
+
+<div class="col-md-3">
+
+<label>Vendor</label>
+
+<select
+name="vendor"
+class="form-control">
+
+<option value="">
+All Vendors
+</option>
+
+
+{% for v in vendors %}
+
+<option value="{{v.id}}">
+
+{{v.vendor_name}}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+
+<div class="col-md-3">
+
+<label>Branch</label>
+
+<select
+name="branch"
+class="form-control">
+
+
+<option value="">
+All Branch
+</option>
+
+
+{% for b in branches %}
+
+<option value="{{b.id}}">
+
+{{b.branch_name}}
+
+</option>
+
+{% endfor %}
+
+
+</select>
+
+</div>
+
+
+
+<div class="col-md-3 mt-4">
+
+
+<button class="btn btn-primary">
+
+Search
+
+</button>
+
+
+<a href="{% url 'transactions:transaction_summary' %}"
+class="btn btn-secondary">
+
+Clear
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</form>
+
+<br>
+<table class="table table-bordered">
+
+
+<tr>
+
+<th>Voucher</th>
+<th>Date</th>
+<th>Vendor</th>
+<th>GL</th>
+<th>Branch</th>
+<th>Amount</th>
+<th>DR/CR</th>
+
+</tr>
+
+
+
+{% for t in data %}
+
+
+<tr>
+
+<td>{{t.voucher_no}}</td>
+
+<td>{{t.transaction_date}}</td>
+
+<td>{{t.vendor.vendor_name}}</td>
+
+<td>{{t.gl_no}}</td>
+
+<td>{{t.branch.branch_name}}</td>
+
+<td>{{t.amount}}</td>
+
+<td>
+{% if t.dr_cr_in == 1 %}
+                    DR
+                    {% else %}
+                    CR
+                    {% endif %}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+{% endblock %}

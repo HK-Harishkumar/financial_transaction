@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h3>
+Trial Balance Generation
+</h3>
+
+
+<p>
+Click generate button to prepare trial balance
+</p>
+
+
+<a
+href="{% url 'trialbalance:generate_trial_balance' %}"
+class="btn btn-success">
+
+
+Generate Trial Balance
+
+
+</a>
+
+
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+
+<div class="d-flex justify-content-between">
+
+
+<h3>
+  Branch Master Summary
+</h3>
+
+
+<a
+href="{% url 'masters:create_branch' %}"
+class="btn btn-primary">
+
+
+Create Branch
+
+
+</a>
+
+
+</div>
+
+<form method="GET">
+
+<div class="row">
+
+
+<div class="col-md-4">
+
+
+<input
+type="text"
+name="branch_name"
+class="form-control"
+placeholder="Search Branch Name"
+value="{{request.GET.branch_name}}">
+
+
+</div>
+
+
+
+<div class="col-md-2">
+
+
+<button
+class="btn btn-primary">
+
+Search
+
+</button>
+
+
+</div>
+
+
+
+<div class="col-md-2">
+
+
+<a
+href="{% url 'masters:branch_list' %}"
+class="btn btn-secondary">
+
+Clear
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</form>
+
+
+<br>
+
+
+<table class="table table-bordered">
+
+
+<thead>
+
+
+<tr>
+
+<th>ID</th>
+
+<th>Branch Code</th>
+
+<th>Branch Name</th>
+
+
+<th>Status</th>
+
+</tr>
+
+
+</thead>
+
+
+<tbody>
+
+
+
+{% for branch in branchs %}
+
+
+<tr>
+
+
+<td>
+{{branch.id}}
+</td>
+
+
+<td>
+{{branch.branch_code}}
+</td>
+
+
+<td>
+{{branch.branch_name}}
+</td>
+
+
+
+
+<td>
+{% if branch.status == 1 %}
+                    ACTIVE
+                    {% else %}
+                    INACTIVE
+                    {% endif %}
+</td>
+
+
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</tbody>
+
+
+</table>
+
+
+{% endblock %}

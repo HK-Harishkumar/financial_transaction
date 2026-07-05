@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h3>Create GL Master</h3>
+
+
+<form method="POST">
+
+
+{% csrf_token %}
+
+
+<div class="mb-3">
+
+    <label>
+    GL Code
+    </label>
+
+    <input
+    type="text"
+    name="gl_code"
+    class="form-control"
+    required>
+
+    </div>
+
+
+
+<!--<div class="mb-3">-->
+
+<!--    <label>-->
+<!--    GL Name-->
+<!--    </label>-->
+
+<!--    <input-->
+<!--    type="text"-->
+<!--    name="gl_name"-->
+<!--    class="form-control"-->
+<!--    required>-->
+
+<!--</div>-->
+
+    <div class="mb-3">
+
+    <label>
+    GL Description
+    </label>
+
+    <input
+    type="text"
+    name="gl_desc"
+    class="form-control"
+    required>
+
+</div>
+
+
+
+<div class="mb-3">
+
+
+    <label>
+    GL Type
+    </label>
+
+
+    <select
+    name="gl_type"
+    class="form-control">
+
+
+    <option>
+    ASSET
+    </option>
+
+
+    <option>
+    LIABILITY
+    </option>
+
+
+    <option>
+    INCOME
+    </option>
+
+
+    <option>
+    EXPENSE
+    </option>
+
+
+</select>
+
+
+</div>
+
+
+
+<div class="mb-3">
+
+    <label>
+    Status
+    </label>
+
+
+    <select
+    name="status"
+    class="form-control">
+
+
+    <option value="ACTIVE">
+    ACTIVE
+    </option>
+
+
+    <option value="INACTIVE">
+    INACTIVE
+    </option>
+
+
+    </select>
+
+
+</div>
+
+
+
+    <button
+    class="btn btn-success">
+
+    Save
+
+    </button>
+
+
+    <a href="{% url 'masters:gl_list' %}" class="btn btn-secondary">
+        Back
+    </a>
+</form>
+
+
+{% endblock %}

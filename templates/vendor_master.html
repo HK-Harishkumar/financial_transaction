@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Create Vendor</h3>
+
+<form action="{% url 'masters:create_vendor' %}" method="POST" autocomplete="on">
+
+    {% csrf_token %}
+
+    <div class="mb-3">
+
+        <label>
+            Vendor Code
+        </label>
+
+        <input
+            type="text"
+            name="vendor_code"
+            class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>
+            Vendor Name
+        </label>
+
+        <input
+            type="text"
+            name="vendor_name"
+            class="form-control">
+
+    </div>
+
+    <div class="mb-3">
+
+        <label>
+            Status
+        </label>
+
+        <select
+            name="status"
+            class="form-control">
+
+            <option value="ACTIVE">
+                ACTIVE
+            </option>
+
+            <option value="INACTIVE">
+                INACTIVE
+            </option>
+
+        </select>
+
+    </div>
+
+    <button
+        class="btn btn-success">
+
+        Save
+
+    </button>
+
+    <a href="{% url 'masters:vendor_list' %}" class="btn btn-secondary">
+        Back
+    </a>
+
+
+</form>
+
+{% endblock %}

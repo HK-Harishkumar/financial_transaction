@@ -1,0 +1,426 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+
+<h3>
+Financial Data Mining Analysis
+</h3>
+
+
+<a
+href="{% url 'dashboard:download_vendor_analysis' %}"
+class="btn btn-success">
+
+Download Excel
+
+</a>
+<br>
+<hr>
+
+
+<h4>
+Branch Wise Transaction Analysis
+</h4>
+
+
+<table class="table table-bordered">
+
+
+<tr>
+
+<th>Branch</th>
+
+<th>Total Amount</th>
+
+<th>Transaction Count</th>
+
+</tr>
+
+
+{% for b in branch_analysis %}
+
+
+<tr>
+
+
+<td>
+{{b.branch__branch_name}}
+</td>
+
+
+<td>
+{{b.total_amount}}
+</td>
+
+
+<td>
+{{b.count}}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+
+<hr>
+
+
+<h4>
+Monthly Transaction Trend
+</h4>
+
+
+<table class="table table-bordered">
+
+
+<tr>
+
+<th>Month</th>
+
+<th>Total Amount</th>
+
+<th>Transactions</th>
+
+</tr>
+
+
+
+{% for m in monthly_trend %}
+
+
+<tr>
+
+
+<td>
+{{m.month}}
+</td>
+
+
+<td>
+{{m.amount}}
+</td>
+
+
+<td>
+{{m.count}}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+
+<hr>
+
+
+<h4>
+High Value Transactions
+</h4>
+
+
+
+<table class="table table-bordered">
+
+
+<tr>
+
+<th>Voucher No</th>
+
+<th>Vendor</th>
+
+<th>GL</th>
+
+<th>Amount</th>
+
+</tr>
+
+
+
+{% for h in high_value %}
+
+
+<tr>
+
+
+<td>
+{{h.voucher_no}}
+</td>
+
+
+<td>
+{{h.vendor.vendor_name}}
+</td>
+
+
+<td>
+{{h.gl_no}}
+</td>
+
+
+<td>
+{{h.amount}}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</table>
+
+
+
+<hr>
+
+
+<h4>
+Debit Credit Analysis
+</h4>
+
+
+
+<table class="table table-bordered">
+
+
+<tr>
+
+<th>Type</th>
+
+<th>Total Amount</th>
+
+<th>Count</th>
+
+</tr>
+
+
+
+{% for d in dc_analysis %}
+
+
+<tr>
+
+
+<td>
+
+{% if d.debit_credit == 'DR' %}
+
+Debit
+
+{% else %}
+
+Credit
+
+{% endif %}
+
+</td>
+
+
+<td>
+{{d.total}}
+</td>
+
+
+<td>
+{{d.count}}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</table>
+<hr>
+
+
+<h4>
+Vendor Payment Trend
+</h4>
+
+
+<table class="table table-bordered">
+
+
+<tr>
+
+<th>Vendor</th>
+
+<th>Total Amount</th>
+
+<th>No Of Transactions</th>
+
+</tr>
+
+
+
+{% for v in vendor_analysis %}
+
+
+<tr>
+
+
+<td>
+{{v.vendor__vendor_name}}
+</td>
+
+
+<td>
+{{v.total_amount}}
+</td>
+
+
+<td>
+{{v.transaction_count}}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+
+<hr>
+
+
+
+<h4>
+GL Transaction Pattern
+</h4>
+
+
+<table class="table table-bordered">
+
+
+<tr>
+
+<th>GL</th>
+
+<th>Total Amount</th>
+
+<th>Count</th>
+
+</tr>
+
+
+
+{% for g in gl_analysis %}
+
+
+<tr>
+
+<td>
+{{g.gl_no}}
+</td>
+
+
+<td>
+{{g.total_amount}}
+</td>
+
+
+<td>
+{{g.count}}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+
+<hr>
+
+
+
+<h4>
+Repeated Transaction Pattern
+</h4>
+
+
+
+<table class="table table-bordered">
+
+
+<tr>
+
+<th>Vendor</th>
+
+<th>GL</th>
+
+<th>Amount</th>
+
+<th>Repeat Count</th>
+
+
+</tr>
+
+
+
+{% for r in repeated %}
+
+
+<tr>
+
+
+<td>
+{{r.vendor_id}}
+</td>
+
+
+<td>
+{{r.gl_no}}
+</td>
+
+
+<td>
+{{r.amount}}
+</td>
+
+
+<td>
+{{r.repeat_count}}
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+
+</table>
+
+
+
+{% endblock %}
